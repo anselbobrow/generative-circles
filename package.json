@@ -2,9 +2,10 @@
   "name": "generative_circles",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve --open"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,16 @@
   "bugs": {
     "url": "https://github.com/anselbobrow/generative_circles/issues"
   },
-  "homepage": "https://github.com/anselbobrow/generative_circles#readme"
+  "homepage": "https://github.com/anselbobrow/generative_circles#readme",
+  "devDependencies": {
+    "@types/p5": "^1.4.2",
+    "ts-loader": "^9.3.0",
+    "typescript": "^4.7.2",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0"
+  },
+  "dependencies": {
+    "p5": "^1.4.1"
+  }
 }
