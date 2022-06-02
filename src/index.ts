@@ -1,4 +1,5 @@
 import * as p5 from 'p5';
+import hexRgb from 'hex-rgb';
 
 export const sketch = (p: p5) => {
     p.setup = () => {
@@ -6,7 +7,9 @@ export const sketch = (p: p5) => {
         p.background('#0C132D');
 
         p.noStroke();
-        const colors = ['#f9b8b1', '#25388e', '#57dbd8', '#f84791'];
+        let colors: string[] = ['#f9b8b1', '#25388e', '#57dbd8', '#f84791'];
+
+        const rgbColors = colors.map(c => hexRgb(c, { format: "array", alpha: 0.5 }));
 
         const numCircles = p.random(5, 15);
         let diameters = "";
@@ -23,17 +26,17 @@ export const sketch = (p: p5) => {
         console.log("# circles: " + numCircles.toFixed());
         console.log("diameters: " + diameters);
 
-        console.log("[test] ensure no super tiny circles");
-        for (let i = 0; i < 1000; i++) {
-            let exp = quadraticDiameter(p.random());
-            if (exp < 10) {
-                console.log("fail");
-                break;
-            }
-            if (i == 999) {
-                console.log("pass");
-            }
-        }
+        // console.log("[test] ensure no super tiny circles");
+        // for (let i = 0; i < 1000; i++) {
+        //     let exp = quadraticDiameter(p.random());
+        //     if (exp < 10) {
+        //         console.log("fail");
+        //         break;
+        //     }
+        //     if (i == 999) {
+        //         console.log("pass");
+        //     }
+        // }
     }
 
     p.draw = () => {
