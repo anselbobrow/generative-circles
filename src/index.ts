@@ -1,5 +1,6 @@
 import * as p5 from 'p5';
-import hexRgb from 'hex-rgb';
+import hexRgb, { RgbaTuple } from 'hex-rgb';
+import Nucleus from './Nucleus'
 
 export const sketch = (p: p5) => {
     p.setup = () => {
@@ -9,13 +10,14 @@ export const sketch = (p: p5) => {
         p.noStroke();
         let colors: string[] = ['#f9b8b1', '#25388e', '#57dbd8', '#f84791'];
 
-        const rgbColors = colors.map(c => hexRgb(c, { format: "array", alpha: 0.5 }));
+        const rgbaColors = colors.map(c => hexRgb(c, { format: "array", alpha: p.random(255) }));
 
         const numCircles = p.random(5, 15);
         let diameters = "";
 
         for (let i = 0; i < numCircles; i++) {
-            p.fill(p.random(colors));
+            p.fill(p.random(rgbaColors));
+
             let d = quadraticDiameter(p.random());
             diameters += d.toFixed() + ", ";
 
