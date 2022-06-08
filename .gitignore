@@ -2,3 +2,4 @@
 .DS_Store
 .VSCode
 node_modules
+dist/bundle.js
