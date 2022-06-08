@@ -1,22 +1,24 @@
 import * as p5 from 'p5';
-import hexRgb, { RgbaTuple } from 'hex-rgb';
-import Nucleus from './Nucleus'
+const { harmonies, utils: { xspace } } = require("prismaek");
 
 export const sketch = (p: p5) => {
     p.setup = () => {
         p.createCanvas(p.windowWidth, p.windowHeight);
         p.background('#0C132D');
-
+        // use hsv with the same max vals as the prismaek library
+        p.colorMode(p.HSB, 360, 1, 1);
         p.noStroke();
-        let colors: string[] = ['#f9b8b1', '#25388e', '#57dbd8', '#f84791'];
-
-        const rgbaColors = colors.map(c => hexRgb(c, { format: "array", alpha: p.random(255) }));
 
         const numCircles = p.random(5, 15);
         let diameters = "";
 
+        let colors: string[] = ['#f9b8b1', '#25388e', '#57dbd8', '#f84791'];
+        let hsvColors = colors.map(c => xspace(c, "hsv"));
+
         for (let i = 0; i < numCircles; i++) {
-            p.fill(p.random(rgbaColors));
+            let color = p.random(hsvColors);
+            let { h, s, v } = harmonies.complementary(color)[0];
+            p.fill(h, s, v);
 
             let d = quadraticDiameter(p.random());
             diameters += d.toFixed() + ", ";
@@ -39,6 +41,7 @@ export const sketch = (p: p5) => {
         //         console.log("pass");
         //     }
         // }
+
     }
 
     p.draw = () => {

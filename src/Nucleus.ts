@@ -1,4 +1,5 @@
 export default class Nucleus {
+    // position of Nucleus on the page (what unit should this be?)
     x: number;
     y: number;
 
@@ -6,5 +7,10 @@ export default class Nucleus {
         this.x = x;
         this.y = y;
     }
+
+    // TODO store attributes such as number/size of rings,
+    // whether or not to feather, color, transparency, basically
+    // anything from circle attributes section of notes document
+    // (potentially create circle/ring subclass)
 
 }

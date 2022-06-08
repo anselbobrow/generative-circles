@@ -28,7 +28,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "hex-rgb": "^5.0.0",
-    "p5": "^1.4.1"
+    "p5": "^1.4.1",
+    "prismaek": "^0.2.0"
   }
 }
