@@ -19,6 +19,9 @@ export const sketch = (p: p5) => {
 
         ns.generateRandom(p);
         ns.render(p);
+
+        console.log("original colors:\n" + JSON.stringify(hsvColors, null, 4));
+        console.log("complements:\n" + JSON.stringify(hsvColors.map(c => harmonies.complementary(c)[1]), null, 4));
     }
 
     p.mouseClicked = () => {
