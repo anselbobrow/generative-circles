@@ -1,6 +1,5 @@
 import { HSV, Point } from "./customTypes";
 import P5Circle from "./P5Circle";
-const { utils: { cspace } } = require("prismaek");
 
 export enum Theme {
     DARK,
