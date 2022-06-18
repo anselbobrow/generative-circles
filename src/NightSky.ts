@@ -63,7 +63,8 @@ export default class NightSky {
         }
 
         // visualization -> https://www.desmos.com/calculator/4yuqvam6k4
-        let y = (170 * Math.pow(x, 5)) + (46 * x) + 10;
+        // let y = (170 * Math.pow(x, 5)) + (46 * x) + 10;
+        let y = (170 * Math.pow(x, 5)) + (46 * x) + 50;
         return y;
     }
 

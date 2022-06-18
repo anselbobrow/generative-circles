@@ -12,7 +12,7 @@ export const sketch = (p: p5) => {
         // use hsv with the same max vals as the prismaek library
         p.colorMode(p.HSB, 360, 1, 1);
 
-        numPlanets = p.random(5, 15);
+        numPlanets = p.random(2, 5);
         colors = ['#f9b8b1', '#25388e', '#57dbd8', '#f84791'];
         hsvColors = colors.map(c => xspace(c, "hsv"));
         ns = new NightSky(numPlanets, hsvColors);
@@ -25,8 +25,9 @@ export const sketch = (p: p5) => {
     }
 
     p.mouseClicked = () => {
-        ns.allPlanets.forEach(p => { p.circles[0].fill = harmonies.complementary(p.circles[0].fill)[1] })
-        ns.render(p);
+        // ns.allPlanets.forEach(p => { p.circles[0].fill = harmonies.complementary(p.circles[0].fill)[1] })
+        // ns.render(p);
+        p.setup();
         return false;
     }
 

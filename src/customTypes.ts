@@ -1,8 +1,10 @@
+const DARK_SHADE_HSV: HSV = { h: 340, s: 0.09, v: 0.13 };
+const LIGHT_SHADE_HSV: HSV = { h: 340, s: 0, v: 1 };
+
 interface HSV {
     h: number,
     s: number,
     v: number,
-
 }
 
 interface Point {
@@ -30,4 +32,4 @@ class Alpha {
     }
 }
 
-export { HSV, Alpha, Point };
+export { HSV, Alpha, Point, DARK_SHADE_HSV, LIGHT_SHADE_HSV };
