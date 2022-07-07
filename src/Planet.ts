@@ -1,10 +1,5 @@
-import { HSV, Point } from "./customTypes";
+import { HSV, Point, Theme } from "./customTypes";
 import P5Circle from "./P5Circle";
-
-export enum Theme {
-    DARK,
-    LIGHT,
-}
 
 export default class Planet {
     protected pos: Point;

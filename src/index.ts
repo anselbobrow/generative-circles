@@ -18,10 +18,10 @@ export const sketch = (p: p5) => {
         ns = new NightSky(numPlanets, hsvColors);
 
         ns.generateRandom(p);
-        ns.render(p);
+        ns.renderPlanets(p);
 
-        console.log("original colors:\n" + JSON.stringify(hsvColors, null, 4));
-        console.log("complements:\n" + JSON.stringify(hsvColors.map(c => harmonies.complementary(c)[1]), null, 4));
+        // console.log("original colors:\n" + JSON.stringify(hsvColors, null, 4));
+        // console.log("complements:\n" + JSON.stringify(hsvColors.map(c => harmonies.complementary(c)[1]), null, 4));
     }
 
     p.mouseClicked = () => {

@@ -1,7 +1,8 @@
 import * as p5 from "p5";
-import { HSV, Point } from "./customTypes";
-import Planet, { Theme } from "./Planet";
+import { HSV, Point, Theme } from "./customTypes";
+import Planet from "./Planet";
 import Saturn from "./Saturn";
+import BinaryStar from "./BinaryStar";
 
 export default class NightSky {
     allPlanets: Planet[] = [];
@@ -15,19 +16,29 @@ export default class NightSky {
 
     public generateRandom(p: p5) {
         let allPlanets: Planet[] = [];
+
+        // add Saturns
         for (let i = 0; i < this.numPlanets; i++) {
-            let pos: Point = {
-                x: p.randomGaussian(p.windowWidth / 2, p.windowWidth / 8),
-                y: p.randomGaussian(p.windowHeight / 2, p.windowHeight / 8)
-            };
+            let pos = this.getRandomPos(p);
             let size = this.scaleExponential(p.random());
-            let saturn = new Saturn(pos, size, Theme.DARK, p.random(this.colors));
+            let theme = p.random([Theme.DARK, Theme.LIGHT]);
+            let saturn = new Saturn(pos, size, theme, p.random(this.colors));
             allPlanets.push(saturn);
         }
+
+        // add BinaryStars
+        for (let i = 0; i < 1; i++) {
+            let pos = this.getRandomPos(p);
+            let size = this.scaleExponential(p.random());
+            let theme = p.random([Theme.DARK, Theme.LIGHT]);
+            let binaryStar = new BinaryStar(pos, size, theme, p.random(this.colors));
+            allPlanets.push(binaryStar);
+        }
+
         this.allPlanets = allPlanets;
     }
 
-    public render(p: p5) {
+    public renderPlanets(p: p5) {
         this.allPlanets.forEach(planet => {
             planet.circles.forEach(circle => {
                 // set fill color and transparency
@@ -57,9 +68,22 @@ export default class NightSky {
         });
     }
 
+    // public renderConnections(p: p5) {
+    //     let size = this.allPlanets.length;
+    //     let E: [[number]] = [[]];
+    // }
+
+    private getRandomPos(p: p5): Point {
+        let pos: Point = {
+            x: p.randomGaussian(p.windowWidth / 2, p.windowWidth / 8),
+            y: p.randomGaussian(p.windowHeight / 2, p.windowHeight / 8)
+        };
+        return pos;
+    }
+
     private scaleExponential(x: number): number {
         if (x < 0 || x > 1) {
-            throw new RangeError("quadraticDiameter: invalid input (not between 0 and 1)");
+            throw new RangeError("scaleExponential: invalid input (not between 0 and 1)");
         }
 
         // visualization -> https://www.desmos.com/calculator/4yuqvam6k4

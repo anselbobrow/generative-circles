@@ -12,6 +12,11 @@ interface Point {
     y: number,
 }
 
+enum Theme {
+    DARK,
+    LIGHT,
+}
+
 class Alpha {
     private _val: number;
 
@@ -32,4 +37,4 @@ class Alpha {
     }
 }
 
-export { HSV, Alpha, Point, DARK_SHADE_HSV, LIGHT_SHADE_HSV };
+export { HSV, Alpha, Point, Theme, DARK_SHADE_HSV, LIGHT_SHADE_HSV };
