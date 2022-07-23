@@ -38,6 +38,49 @@ export default class NightSky {
         this.allPlanets = allPlanets;
     }
 
+    public generateRandomNoOverlap(p: p5) {
+        let allPlanets: Planet[] = [];
+
+        // add Saturns
+        for (let i = 0; i < this.numPlanets; i++) {
+            let size = this.scaleExponential(p.random());
+            let pos: Point;
+            let isOverlap = true;
+            while (isOverlap) {
+                pos = this.getRandomPos(p);
+                if (allPlanets.length == 0) {
+                    isOverlap = false;
+                } else {
+                    let overlapByPlanet = new Array(allPlanets.length).fill(true);
+                    allPlanets.forEach((planet, idx) => {
+                        let dx = pos.x - planet.pos.x;
+                        let dy = pos.y - planet.pos.y;
+                        let d = Math.sqrt(dx ** 2 + dy ** 2);
+                        console.log(d);
+                        if (d > (planet.size + size) / 2) {
+                            overlapByPlanet[idx] = false;
+                        }
+                    });
+                    isOverlap = !overlapByPlanet.every(item => !item);
+                }
+            }
+            let theme = p.random([Theme.DARK, Theme.LIGHT]);
+            let saturn = new Saturn(pos, size, theme, p.random(this.colors));
+            allPlanets.push(saturn);
+        }
+
+        // add BinaryStars
+        for (let i = 0; i < 1; i++) {
+            let pos = this.getRandomPos(p);
+            let size = this.scaleExponential(p.random());
+            let theme = p.random([Theme.DARK, Theme.LIGHT]);
+            let binaryStar = new BinaryStar(pos, size, theme, p.random(this.colors));
+            allPlanets.push(binaryStar);
+        }
+
+        this.allPlanets = allPlanets;
+    }
+
     public renderPlanets(p: p5) {
         this.allPlanets.forEach(planet => {
             planet.circles.forEach(circle => {

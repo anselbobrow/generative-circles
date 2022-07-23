@@ -17,7 +17,7 @@ export const sketch = (p: p5) => {
         hsvColors = colors.map(c => xspace(c, "hsv"));
         ns = new NightSky(numPlanets, hsvColors);
 
-        ns.generateRandom(p);
+        ns.generateRandomNoOverlap(p);
         ns.renderPlanets(p);
 
         // console.log("original colors:\n" + JSON.stringify(hsvColors, null, 4));
