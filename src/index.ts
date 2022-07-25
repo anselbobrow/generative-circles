@@ -32,6 +32,9 @@ export const sketch = (p: p5) => {
     }
 
     p.draw = () => {
+        p.background('#0C132D');
+        ns.renderPlanets(p);
+        ns.renderMoons(p);
     }
 }
 

@@ -1,11 +1,13 @@
 import * as p5 from "p5";
-import { HSV, Point, Theme } from "./customTypes";
+import { HSV, LIGHT_SHADE_HSV, Point, Theme } from "./customTypes";
 import Planet from "./Planet";
 import Saturn from "./Saturn";
 import BinaryStar from "./BinaryStar";
+import Moon from "./Moon";
 
 export default class NightSky {
-    allPlanets: Planet[] = [];
+    allPlanets: Planet[];
+    allMoons: Moon[];
     numPlanets: number;
     colors: HSV[];
 
@@ -40,6 +42,7 @@ export default class NightSky {
 
     public generateRandomNoOverlap(p: p5) {
         let allPlanets: Planet[] = [];
+        let allMoons: Moon[] = [];
 
         // add Saturns
         for (let i = 0; i < this.numPlanets; i++) {
@@ -56,7 +59,6 @@ export default class NightSky {
                         let dx = pos.x - planet.pos.x;
                         let dy = pos.y - planet.pos.y;
                         let d = Math.sqrt(dx ** 2 + dy ** 2);
-                        console.log(d);
                         if (d > (planet.size + size) / 2) {
                             overlapByPlanet[idx] = false;
                         }
@@ -67,6 +69,12 @@ export default class NightSky {
             let theme = p.random([Theme.DARK, Theme.LIGHT]);
             let saturn = new Saturn(pos, size, theme, p.random(this.colors));
             allPlanets.push(saturn);
+
+            if (size > 150) {
+                console.log("generating moon");
+                let moon = new Moon(50, saturn);
+                allMoons.push(moon);
+            }
         }
 
         // add BinaryStars
@@ -79,6 +87,7 @@ export default class NightSky {
         }
 
         this.allPlanets = allPlanets;
+        this.allMoons = allMoons;
     }
 
     public renderPlanets(p: p5) {
@@ -108,6 +117,16 @@ export default class NightSky {
                 // draw the circle
                 p.circle(circle.x, circle.y, circle.d);
             });
+        });
+    }
+
+    public renderMoons(p: p5) {
+        this.allMoons.forEach(moon => {
+            let { x, y } = moon.pos;
+            let { h, s, v } = LIGHT_SHADE_HSV;
+            p.fill(h, s, v);
+            p.circle(x, y, moon.size);
+            moon.rotate(0.3);
         });
     }
 
