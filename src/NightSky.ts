@@ -33,7 +33,12 @@ export default class NightSky {
             let pos = this.getRandomPos(p);
             let size = this.scaleExponential(p.random());
             let theme = p.random([Theme.DARK, Theme.LIGHT]);
-            let binaryStar = new BinaryStar(pos, size, theme, p.random(this.colors));
+            let binaryStar = new BinaryStar(
+                pos,
+                size,
+                theme,
+                p.random(this.colors),
+            );
             allPlanets.push(binaryStar);
         }
 
@@ -54,7 +59,9 @@ export default class NightSky {
                 if (allPlanets.length == 0) {
                     isOverlap = false;
                 } else {
-                    let overlapByPlanet = new Array(allPlanets.length).fill(true);
+                    let overlapByPlanet = new Array(allPlanets.length).fill(
+                        true,
+                    );
                     allPlanets.forEach((planet, idx) => {
                         let dx = pos.x - planet.pos.x;
                         let dy = pos.y - planet.pos.y;
@@ -63,7 +70,7 @@ export default class NightSky {
                             overlapByPlanet[idx] = false;
                         }
                     });
-                    isOverlap = !overlapByPlanet.every(item => !item);
+                    isOverlap = !overlapByPlanet.every((item) => !item);
                 }
             }
             let theme = p.random([Theme.DARK, Theme.LIGHT]);
@@ -82,7 +89,12 @@ export default class NightSky {
             let pos = this.getRandomPos(p);
             let size = this.scaleExponential(p.random());
             let theme = p.random([Theme.DARK, Theme.LIGHT]);
-            let binaryStar = new BinaryStar(pos, size, theme, p.random(this.colors));
+            let binaryStar = new BinaryStar(
+                pos,
+                size,
+                theme,
+                p.random(this.colors),
+            );
             allPlanets.push(binaryStar);
         }
 
@@ -91,8 +103,8 @@ export default class NightSky {
     }
 
     public renderPlanets(p: p5) {
-        this.allPlanets.forEach(planet => {
-            planet.circles.forEach(circle => {
+        this.allPlanets.forEach((planet) => {
+            planet.circles.forEach((circle) => {
                 // set fill color and transparency
                 let { h, s, v } = circle.fill;
 
@@ -121,7 +133,7 @@ export default class NightSky {
     }
 
     public renderMoons(p: p5) {
-        this.allMoons.forEach(moon => {
+        this.allMoons.forEach((moon) => {
             let { x, y } = moon.pos;
             let { h, s, v } = LIGHT_SHADE_HSV;
             p.fill(h, s, v);
@@ -138,20 +150,21 @@ export default class NightSky {
     private getRandomPos(p: p5): Point {
         let pos: Point = {
             x: p.randomGaussian(p.windowWidth / 2, p.windowWidth / 8),
-            y: p.randomGaussian(p.windowHeight / 2, p.windowHeight / 8)
+            y: p.randomGaussian(p.windowHeight / 2, p.windowHeight / 8),
         };
         return pos;
     }
 
     private scaleExponential(x: number): number {
         if (x < 0 || x > 1) {
-            throw new RangeError("scaleExponential: invalid input (not between 0 and 1)");
+            throw new RangeError(
+                "scaleExponential: invalid input (not between 0 and 1)",
+            );
         }
 
         // visualization -> https://www.desmos.com/calculator/4yuqvam6k4
         // let y = (170 * Math.pow(x, 5)) + (46 * x) + 10;
-        let y = (170 * Math.pow(x, 5)) + (46 * x) + 50;
+        let y = 170 * Math.pow(x, 5) + 46 * x + 50;
         return y;
     }
-
 }

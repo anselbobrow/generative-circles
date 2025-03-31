@@ -1,4 +1,11 @@
-import { Point, Theme, HSV, Alpha, DARK_SHADE_HSV, LIGHT_SHADE_HSV } from "./customTypes";
+import {
+    Point,
+    Theme,
+    HSV,
+    Alpha,
+    DARK_SHADE_HSV,
+    LIGHT_SHADE_HSV,
+} from "./customTypes";
 import P5Circle from "./P5Circle";
 import Planet from "./Planet";
 
@@ -18,7 +25,8 @@ export default class BinaryStar extends Planet {
         posB.x += this.size * 0.25;
         posB.y += this.size * 0.25;
 
-        let themeColor: HSV = (this.theme === Theme.DARK ? DARK_SHADE_HSV : LIGHT_SHADE_HSV);
+        let themeColor: HSV =
+            this.theme === Theme.DARK ? DARK_SHADE_HSV : LIGHT_SHADE_HSV;
 
         let starA = new P5Circle(posA, this.size, this.color);
         let starB = new P5Circle(posB, this.size, themeColor);

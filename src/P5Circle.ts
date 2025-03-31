@@ -1,4 +1,4 @@
-import { Alpha, HSV, Point } from './customTypes';
+import { Alpha, HSV, Point } from "./customTypes";
 
 export default class P5Circle {
     x: number;
@@ -9,7 +9,14 @@ export default class P5Circle {
     strokeWeight: number;
     alpha: Alpha;
 
-    constructor(pos: Point, d: number, fill: HSV, stroke: HSV = null, strokeWeight: number = null, alpha: Alpha = null) {
+    constructor(
+        pos: Point,
+        d: number,
+        fill: HSV,
+        stroke: HSV = null,
+        strokeWeight: number = null,
+        alpha: Alpha = null,
+    ) {
         this.x = pos.x;
         this.y = pos.y;
         this.d = d;

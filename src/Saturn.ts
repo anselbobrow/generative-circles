@@ -1,4 +1,11 @@
-import { Alpha, DARK_SHADE_HSV, HSV, LIGHT_SHADE_HSV, Point, Theme } from "./customTypes";
+import {
+    Alpha,
+    DARK_SHADE_HSV,
+    HSV,
+    LIGHT_SHADE_HSV,
+    Point,
+    Theme,
+} from "./customTypes";
 import P5Circle from "./P5Circle";
 import Planet from "./Planet";
 
@@ -10,7 +17,8 @@ export default class Saturn extends Planet {
 
     private generateCircles() {
         // circles need to be listed in size order to render correctly
-        let nucleusColor: HSV = (this.theme === Theme.DARK ? DARK_SHADE_HSV : LIGHT_SHADE_HSV);
+        let nucleusColor: HSV =
+            this.theme === Theme.DARK ? DARK_SHADE_HSV : LIGHT_SHADE_HSV;
 
         let ring3 = new P5Circle(this.pos, this.size * 2, this.color);
         ring3.alpha = new Alpha(0.1);
