@@ -12,9 +12,21 @@ import Planet from "./Planet";
 export default class BinaryStar extends Planet {
     private angle: number;
     private radius: number;
+    private swapDirection: boolean;
 
-    constructor(pos: Point, size: number, theme: Theme, color: HSV) {
+    constructor(
+        pos: Point,
+        size: number,
+        angle: number,
+        theme: Theme,
+        color: HSV,
+    ) {
         super(pos, size, theme, color);
+        if (angle < 0 || angle > 360) {
+            throw new Error("Angle must be a valid value in degrees.");
+        }
+        this.angle = angle;
+        this.swapDirection = Math.random() < 0.5;
         this.generateCircles();
     }
 
@@ -34,12 +46,16 @@ export default class BinaryStar extends Planet {
         this.circles.push(starB);
 
         // initializes location with respect to angle
-        this.angle = 45;
         this.rotate(0);
     }
 
     public rotate(deg: number) {
-        this.angle += deg;
+        if (this.swapDirection) {
+            this.angle -= deg;
+        } else {
+            this.angle += deg;
+        }
+
         if (this.angle >= 360) {
             this.angle -= 360;
         }

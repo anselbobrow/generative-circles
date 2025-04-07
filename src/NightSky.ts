@@ -31,9 +31,11 @@ export default class NightSky {
             const pos = this.getRandomPos(p);
             const size = this.scaleExponential(p.random());
             const theme = p.random([Theme.DARK, Theme.LIGHT]);
+            const angle = Math.random() * 360;
             const binaryStar = new BinaryStar(
                 pos,
                 size,
+                angle,
                 theme,
                 p.random(this.colors),
             );
@@ -72,7 +74,8 @@ export default class NightSky {
 
             if (size > 150) {
                 // console.log("generating moon");
-                const moon = new Moon(50, saturn);
+                const angle = Math.random() * 360;
+                const moon = new Moon(50, angle, saturn);
                 this.allMoons.push(moon);
             }
         }
@@ -82,9 +85,11 @@ export default class NightSky {
             const pos = this.getRandomPos(p);
             const size = this.scaleExponential(p.random());
             const theme = p.random([Theme.DARK, Theme.LIGHT]);
+            const angle = Math.random() * 360;
             const binaryStar = new BinaryStar(
                 pos,
                 size,
+                angle,
                 theme,
                 p.random(this.colors),
             );
