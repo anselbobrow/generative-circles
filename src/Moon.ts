@@ -14,8 +14,8 @@ export default class Moon {
 
     public rotate(deg: number) {
         this.angle += deg;
-        if (this.angle == 360) {
-            this.angle = 0;
+        if (this.angle >= 360) {
+            this.angle -= 360;
         }
     }
 
@@ -28,5 +28,4 @@ export default class Moon {
         y += r * Math.cos(angle);
         return { x, y };
     }
-
 }
