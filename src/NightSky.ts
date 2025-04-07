@@ -136,6 +136,7 @@ export default class NightSky {
             const { x, y } = moon.pos;
             const { h, s, v } = LIGHT_SHADE_HSV;
             p.fill(h, s, v);
+            p.noStroke();
             p.circle(x, y, moon.size);
             moon.rotate(0.3);
         });

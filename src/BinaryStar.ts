@@ -39,8 +39,9 @@ export default class BinaryStar extends Planet {
 
         const starA = new P5Circle(this.pos, this.size, this.color);
         const starB = new P5Circle(this.pos, this.size, themeColor);
-
         starA.alpha = starB.alpha = new Alpha(0.5);
+        starB.stroke = this.color;
+        starB.strokeWeight = 2;
 
         this.circles.push(starA);
         this.circles.push(starB);
